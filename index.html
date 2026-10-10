@@ -7,6 +7,12 @@
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
     <title>Odyssey TV</title>
+    <meta name="theme-color" content="#090c16" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23090c16'/%3E%3Crect x='10' y='15' width='44' height='34' rx='7' fill='%23e7bd70'/%3E%3Cpath d='m27 24 15 8-15 8V24Z' fill='%23090c16'/%3E%3C/svg%3E"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -740,6 +746,692 @@
       [hidden] {
         display: none !important;
       }
+
+      /* ---------- Refined cinema library ---------- */
+      :root {
+        --bg-deep: #090c16;
+        --bg-panel: #111726;
+        --bg-panel-2: #182033;
+        --gold: #e7bd70;
+        --gold-soft: #f3d08b;
+        --ink: #f5f3ee;
+        --ink-muted: #a4adbf;
+        --radius: 18px;
+      }
+
+      body {
+        background:
+          radial-gradient(
+            ellipse 760px 440px at 82% 2%,
+            rgba(77, 99, 153, 0.2),
+            transparent 68%
+          ),
+          radial-gradient(
+            ellipse 640px 420px at 4% 24%,
+            rgba(164, 119, 53, 0.1),
+            transparent 68%
+          ),
+          linear-gradient(180deg, #0b101c 0%, var(--bg-deep) 68%);
+      }
+
+      .wrap {
+        max-width: 1240px;
+        padding: 30px 36px 88px;
+      }
+
+      .masthead {
+        min-height: 60px;
+        margin-bottom: 34px;
+        padding-bottom: 22px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .header-text {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .wordmark {
+        font-size: clamp(1.8rem, 4vw, 2.3rem);
+        font-style: normal;
+        font-weight: 600;
+        letter-spacing: -0.055em;
+      }
+
+      .brand-lockup {
+        display: flex;
+        align-items: center;
+        flex: 0 0 auto;
+        gap: 12px;
+      }
+
+      .brand-lockup .wordmark {
+        white-space: nowrap;
+      }
+
+      .brand-icon {
+        display: grid;
+        width: 42px;
+        height: 42px;
+        flex: 0 0 42px;
+        place-items: center;
+        border: 1px solid rgba(243, 208, 139, 0.38);
+        border-radius: 13px;
+        background: linear-gradient(145deg, rgba(243, 208, 139, 0.17), rgba(243, 208, 139, 0.045));
+        color: var(--gold-soft);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      }
+
+      .brand-icon svg {
+        width: 23px;
+        height: 23px;
+      }
+
+      .tagline {
+        margin: 0;
+        padding-left: 14px;
+        border-left: 1px solid rgba(255, 255, 255, 0.16);
+        font-size: 0.82rem;
+      }
+
+      .hero {
+        position: relative;
+        isolation: isolate;
+        display: flex;
+        min-height: 310px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 28px;
+        overflow: hidden;
+        margin-bottom: 54px;
+        padding: clamp(30px, 6vw, 68px);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 26px;
+        background:
+          linear-gradient(
+            105deg,
+            rgba(15, 21, 34, 0.98) 5%,
+            rgba(15, 21, 34, 0.88) 50%,
+            rgba(15, 21, 34, 0.22) 100%
+          ),
+          radial-gradient(
+            ellipse at 82% 48%,
+            rgba(231, 189, 112, 0.3),
+            transparent 38%
+          ),
+          #111827;
+        box-shadow: 0 32px 80px rgba(0, 0, 0, 0.28);
+      }
+
+      .hero::before,
+      .hero::after {
+        position: absolute;
+        z-index: -1;
+        content: "";
+        border: 1px solid rgba(243, 208, 139, 0.28);
+        border-radius: 50%;
+        pointer-events: none;
+      }
+
+      .hero::before {
+        top: -160px;
+        right: 6%;
+        width: 540px;
+        height: 540px;
+        box-shadow:
+          0 0 0 26px rgba(243, 208, 139, 0.035),
+          0 0 0 68px rgba(243, 208, 139, 0.025),
+          inset 0 0 90px rgba(231, 189, 112, 0.1);
+      }
+
+      .hero::after {
+        top: -92px;
+        right: 13%;
+        width: 404px;
+        height: 404px;
+        border-color: rgba(243, 208, 139, 0.12);
+      }
+
+      .hero-content {
+        max-width: 590px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        margin: 0 0 18px;
+        color: var(--gold-soft);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--gold);
+        box-shadow: 0 0 14px rgba(243, 208, 139, 0.8);
+        content: "";
+      }
+
+      .hero h2 {
+        max-width: 560px;
+        margin: 0;
+        font-family: var(--serif);
+        font-size: clamp(2.7rem, 6vw, 5rem);
+        font-weight: 400;
+        letter-spacing: -0.045em;
+        line-height: 0.98;
+      }
+
+      .hero-copy {
+        max-width: 440px;
+        margin: 18px 0 26px;
+        color: #b8c0cf;
+        font-size: 0.98rem;
+        line-height: 1.75;
+      }
+
+      .hero .ticket-btn {
+        min-height: 48px;
+        padding: 0 22px;
+      }
+
+      .hero-meta {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        margin: 21px 0 0;
+        color: var(--ink-muted);
+        font-size: 0.8rem;
+      }
+
+      .hero-meta strong {
+        color: var(--ink);
+        font-weight: 700;
+      }
+
+      .library-heading {
+        align-items: flex-end;
+        margin-bottom: 22px;
+      }
+
+      .library-heading h2 {
+        font-family: var(--sans);
+        font-size: 1.35rem;
+        font-style: normal;
+        font-weight: 700;
+        letter-spacing: -0.035em;
+      }
+
+      .library-count {
+        min-width: 26px;
+        padding: 3px 8px;
+        border: 1px solid rgba(243, 208, 139, 0.22);
+        border-radius: 999px;
+        background: rgba(231, 189, 112, 0.08);
+        color: var(--gold-soft);
+        font-size: 0.72rem;
+        text-align: center;
+      }
+
+      .library-subtitle {
+        margin: 7px 0 0;
+        color: var(--ink-muted);
+        font-size: 0.84rem;
+      }
+
+      .library-tools {
+        gap: 9px;
+      }
+
+      .search-field input,
+      .sort-select {
+        min-height: 44px;
+        margin: 0;
+        border-color: rgba(255, 255, 255, 0.12);
+        border-radius: 11px;
+        background: rgba(255, 255, 255, 0.045);
+      }
+
+      .search-field input {
+        width: clamp(200px, 24vw, 280px);
+      }
+
+      .sort-select {
+        width: 100%;
+        appearance: none;
+        -webkit-appearance: none;
+        color-scheme: dark;
+        padding-right: 34px;
+      }
+
+      .sort-select option {
+        background: #111726;
+        color: #f5f3ee;
+      }
+
+      .sort-control {
+        position: relative;
+        min-width: 154px;
+      }
+
+      .sort-control::after {
+        position: absolute;
+        top: 50%;
+        right: 14px;
+        width: 8px;
+        height: 8px;
+        border-right: 1.5px solid var(--ink-muted);
+        border-bottom: 1.5px solid var(--ink-muted);
+        content: "";
+        pointer-events: none;
+        transform: translateY(-70%) rotate(45deg);
+      }
+
+      .search-field input:focus,
+      .sort-select:focus {
+        border-color: rgba(243, 208, 139, 0.7);
+        box-shadow: 0 0 0 3px rgba(243, 208, 139, 0.12);
+        outline: none;
+      }
+
+      .library-grid {
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 285px), 1fr));
+        gap: 16px;
+      }
+
+      .ticket {
+        min-height: 124px;
+        padding: 20px 96px 20px 24px;
+        border: 1px solid rgba(255, 238, 191, 0.68);
+        border-radius: 14px;
+        background:
+          radial-gradient(
+            circle at 14% 20%,
+            rgba(255, 255, 255, 0.52),
+            transparent 35%
+          ),
+          linear-gradient(130deg, #f1dca9 0%, #e5c987 56%, #d8b873 100%);
+        box-shadow:
+          0 13px 28px rgba(0, 0, 0, 0.16),
+          inset 0 1px 0 rgba(255, 255, 255, 0.68);
+      }
+
+      .ticket:hover {
+        transform: translateY(-3px);
+        border-color: #fff0c8;
+        box-shadow:
+          0 19px 36px rgba(0, 0, 0, 0.24),
+          inset 0 1px 0 rgba(255, 255, 255, 0.76);
+      }
+
+      .ticket::before,
+      .ticket::after {
+        position: absolute;
+        top: 50%;
+        z-index: 2;
+        width: 19px;
+        height: 19px;
+        border: 1px solid rgba(216, 184, 115, 0.15);
+        border-radius: 50%;
+        background: #090c16;
+        content: "";
+        transform: translateY(-50%);
+      }
+
+      .ticket::before {
+        left: -10px;
+      }
+
+      .ticket::after {
+        right: -10px;
+      }
+
+      .ticket-stub {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        width: 78px;
+        align-items: center;
+        justify-content: center;
+        border-left: 1px dashed rgba(62, 48, 24, 0.48);
+        background: linear-gradient(
+          90deg,
+          rgba(106, 76, 27, 0.06),
+          rgba(255, 255, 255, 0.1)
+        );
+        pointer-events: none;
+      }
+
+      .ticket-stub::before,
+      .ticket-stub::after {
+        position: absolute;
+        left: -5px;
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: #090c16;
+        content: "";
+      }
+
+      .ticket-stub::before {
+        top: -5px;
+      }
+
+      .ticket-stub::after {
+        bottom: -5px;
+      }
+
+      .ticket-stub-label {
+        margin-top: 17px;
+        color: #67512d;
+        font-size: 0.56rem;
+        font-weight: 800;
+        letter-spacing: 0.13em;
+        text-align: center;
+      }
+
+      .ticket-stub-barcode {
+        position: absolute;
+        bottom: 19px;
+        width: 34px;
+        height: 16px;
+        background: repeating-linear-gradient(
+          90deg,
+          #594526 0 2px,
+          transparent 2px 4px,
+          #594526 4px 5px,
+          transparent 5px 8px
+        );
+        opacity: 0.72;
+      }
+
+      .ticket-play {
+        min-height: 66px;
+        color: #1d2029;
+      }
+
+      .play-icon {
+        width: 44px;
+        height: 44px;
+        border-color: rgba(53, 42, 25, 0.45);
+        background: rgba(255, 248, 227, 0.32);
+        color: #594526;
+      }
+
+      .ticket-play:hover .play-icon {
+        border-color: #17202d;
+        background: #17202d;
+        color: #f3d08b;
+      }
+
+      .ticket-title {
+        margin-bottom: 7px;
+        font-size: 0.94rem;
+        font-weight: 800;
+      }
+
+      .ticket-source {
+        max-width: 100%;
+        overflow: hidden;
+        border-radius: 999px;
+        background: rgba(49, 43, 32, 0.09);
+        color: #555047;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .platform-youtube {
+        background: rgba(142, 37, 43, 0.1);
+        color: #8e252b;
+      }
+
+      .platform-vimeo {
+        background: rgba(25, 102, 130, 0.1);
+        color: #196682;
+      }
+
+      .platform-twitch {
+        background: rgba(91, 60, 134, 0.1);
+        color: #5b3c86;
+      }
+
+      .ticket-actions {
+        top: 9px;
+        right: 9px;
+        opacity: 1;
+        transform: none;
+      }
+
+      .ticket-icon-btn {
+        width: 28px;
+        height: 28px;
+        border: 1px solid rgba(62, 48, 24, 0.18);
+        background: rgba(255, 248, 227, 0.36);
+        color: #685a43;
+      }
+
+      .ticket-icon-btn:hover {
+        border-color: rgba(142, 37, 43, 0.35);
+        background: rgba(142, 37, 43, 0.11);
+        color: #8e252b;
+      }
+
+      .empty-state {
+        margin-top: 0;
+        padding: clamp(38px, 7vw, 76px) 24px;
+        border-color: rgba(255, 255, 255, 0.15);
+        border-radius: 20px;
+        background: rgba(17, 23, 38, 0.65);
+      }
+
+      .empty-state p {
+        max-width: 430px;
+        margin-right: auto;
+        margin-left: auto;
+        line-height: 1.7;
+      }
+
+      .booth {
+        border-color: rgba(255, 255, 255, 0.12);
+        border-radius: 20px;
+      }
+
+      .booth h3 {
+        font-family: var(--sans);
+        font-size: 1.35rem;
+        font-style: normal;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+      }
+
+      .screen-section {
+        padding: clamp(18px, 4vw, 42px);
+      }
+
+      .screen-glass {
+        width: 100%;
+        padding: 8px;
+        border-radius: 18px;
+      }
+
+      .screen-frame {
+        border-radius: 12px;
+      }
+
+      .toast {
+        max-width: min(90vw, 520px);
+        border-radius: 14px;
+        text-align: center;
+      }
+
+      @media (max-width: 700px) {
+        .wrap {
+          padding: 20px 18px 64px;
+        }
+
+        .masthead {
+          display: grid;
+          grid-template-columns: minmax(0, 1fr) auto;
+          align-items: center;
+          margin-bottom: 22px;
+          padding-bottom: 18px;
+        }
+
+        .header-text {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 6px;
+          min-width: 0;
+        }
+
+        .wordmark {
+          white-space: nowrap;
+        }
+
+        .brand-lockup {
+          gap: 9px;
+        }
+
+        .brand-icon {
+          width: 36px;
+          height: 36px;
+          flex-basis: 36px;
+          border-radius: 11px;
+        }
+
+        .brand-icon svg {
+          width: 20px;
+          height: 20px;
+        }
+
+        .tagline {
+          padding-left: 0;
+          border: 0;
+          font-size: 0.75rem;
+        }
+
+        .header-actions {
+          grid-column: 1 / -1;
+          justify-content: space-between;
+          gap: 8px;
+          margin-top: 12px;
+        }
+
+        .ticket-btn.small {
+          min-height: 42px;
+          padding: 0 13px;
+          font-size: 0.8rem;
+        }
+
+        .hero {
+          min-height: 300px;
+          margin-bottom: 38px;
+          padding: 30px 24px;
+        }
+
+        .hero::before {
+          top: -40px;
+          right: -260px;
+          width: 440px;
+          height: 440px;
+        }
+
+        .hero::after {
+          top: 4px;
+          right: -205px;
+          width: 330px;
+          height: 330px;
+        }
+
+        .hero-copy {
+          max-width: 340px;
+          font-size: 0.88rem;
+        }
+
+        .library-heading {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 16px;
+        }
+
+        .library-tools {
+          display: grid;
+          width: 100%;
+          grid-template-columns: minmax(0, 1fr) auto;
+        }
+
+        .search-field,
+        .search-field input {
+          width: 100%;
+          min-width: 0;
+        }
+
+        .sort-select {
+          max-width: 145px;
+          padding-right: 28px;
+          font-size: 0.78rem;
+        }
+
+        .sort-control {
+          min-width: 0;
+          max-width: 145px;
+        }
+
+        .sort-control::after {
+          right: 11px;
+          width: 7px;
+          height: 7px;
+        }
+
+        .library-grid {
+          grid-template-columns: 1fr;
+          gap: 11px;
+        }
+
+        .screen-heading {
+          align-items: flex-start;
+          flex-direction: column;
+          margin-bottom: 14px;
+        }
+
+        .now-showing-title {
+          font-size: 1.5rem;
+        }
+
+        .screen-actions {
+          width: 100%;
+          flex-wrap: wrap;
+          gap: 7px;
+        }
+
+        .screen-actions .ghost-btn {
+          padding: 8px 11px;
+          font-size: 0.75rem;
+        }
+
+        .booth {
+          padding: 28px 22px 22px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
     </style>
   </head>
   <body>
@@ -749,7 +1441,16 @@
     <div class="wrap">
       <header class="masthead">
         <div class="header-text">
-          <h1 class="wordmark">Odyssey TV</h1>
+          <div class="brand-lockup">
+            <span class="brand-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <rect x="3" y="5" width="18" height="14" rx="3" stroke="currentColor" stroke-width="1.6" />
+                <path d="m10 9 5 3-5 3V9Z" fill="currentColor" />
+                <path d="M7 2.8v2.1M12 2.8v2.1M17 2.8v2.1M7 19.1v2.1M12 19.1v2.1M17 19.1v2.1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+              </svg>
+            </span>
+            <h1 class="wordmark">Odyssey TV</h1>
+          </div>
           <p class="tagline">Your curated digital screening room.</p>
         </div>
         <div class="header-actions">
@@ -785,11 +1486,49 @@
         </div>
       </header>
 
+      <section class="hero" aria-labelledby="heroTitle">
+        <div class="hero-content">
+          <p class="eyebrow">Your private screening room</p>
+          <h2 id="heroTitle">Make tonight a movie night.</h2>
+          <p class="hero-copy">
+            Gather the films, live streams, and videos you love in one place.
+            Your next great watch is only a play button away.
+          </p>
+          <button id="heroAddBtn" class="ticket-btn" type="button">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M8 2v12M2 8h12"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+              />
+            </svg>
+            Add to your library
+          </button>
+          <p class="hero-meta">
+            <strong id="heroLibraryCount">0 screenings</strong>
+            <span aria-hidden="true">·</span>
+            Saved just for you
+          </p>
+        </div>
+      </section>
+
       <section class="library-section">
         <div class="library-heading">
-          <h2>
-            Your Library <span id="libraryCount" class="library-count"></span>
-          </h2>
+          <div>
+            <h2>
+              Your library <span id="libraryCount" class="library-count"></span>
+            </h2>
+            <p id="librarySubtitle" class="library-subtitle">
+              Your hand-picked watchlist, all in one place.
+            </p>
+          </div>
           <div class="library-tools">
             <label class="search-field">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -814,15 +1553,17 @@
                 aria-label="Search library"
               />
             </label>
-            <select
-              id="sortSelect"
-              class="sort-select"
-              aria-label="Sort library"
-            >
-              <option value="newest">Newest first</option>
-              <option value="oldest">Oldest first</option>
-              <option value="az">Title A–Z</option>
-            </select>
+            <div class="sort-control">
+              <select
+                id="sortSelect"
+                class="sort-select"
+                aria-label="Sort library"
+              >
+                <option value="newest">Newest first</option>
+                <option value="oldest">Oldest first</option>
+                <option value="az">Title A–Z</option>
+              </select>
+            </div>
           </div>
         </div>
 
@@ -842,7 +1583,7 @@
             />
             <path d="M20 18L30 24L20 30V18Z" fill="currentColor" />
           </svg>
-          <h3>The screen is blank</h3>
+          <h3 id="emptyStateTitle">Your watchlist is waiting</h3>
           <p id="emptyStateText">
             You haven't queued any screenings yet. Add an embed link or video
             URL to begin.
@@ -856,7 +1597,12 @@
 
     <!-- Add Screening Modal -->
     <div id="addModal" class="modal-overlay">
-      <section class="booth" aria-label="Add a title to your library">
+      <section
+        class="booth"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="addModalTitle"
+      >
         <button id="closeAddModal" class="modal-close" aria-label="Close modal">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path
@@ -867,16 +1613,24 @@
             />
           </svg>
         </button>
-        <h3>Add to Library</h3>
+        <h3 id="addModalTitle">Add to your library</h3>
         <form id="addForm">
           <label class="field-label" for="embedInput"
             >Embed code or media link</label
           >
           <textarea
             id="embedInput"
-            placeholder="Paste an <iframe> embed or a video URL…"
+            placeholder="Paste a video link or an &lt;iframe&gt; embed…"
+            aria-describedby="embedHelp"
             required
           ></textarea>
+          <p
+            id="embedHelp"
+            class="library-subtitle"
+            style="margin: -10px 0 18px"
+          >
+            YouTube, Vimeo, Twitch, and most embeddable video links work.
+          </p>
 
           <label class="field-label" for="titleInput">Title (optional)</label>
           <input
@@ -899,13 +1653,29 @@
     </div>
 
     <!-- Theater Mode Overlay -->
-    <section id="screenSection" class="screen-section" aria-live="polite">
+    <section
+      id="screenSection"
+      class="screen-section"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="nowShowingTitle"
+      aria-hidden="true"
+    >
       <div class="screen-heading">
         <div>
           <p class="now-showing-label">Now showing</p>
           <h2 id="nowShowingTitle" class="now-showing-title"></h2>
         </div>
         <div class="screen-actions">
+          <a
+            id="openSourceBtn"
+            class="ghost-btn"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open source
+          </a>
           <button
             id="variantBtn"
             class="ghost-btn"
@@ -950,7 +1720,10 @@
       const libraryGrid = document.getElementById("libraryGrid");
       const emptyState = document.getElementById("emptyState");
       const emptyStateText = document.getElementById("emptyStateText");
+      const emptyStateTitle = document.getElementById("emptyStateTitle");
       const libraryCount = document.getElementById("libraryCount");
+      const heroLibraryCount = document.getElementById("heroLibraryCount");
+      const librarySubtitle = document.getElementById("librarySubtitle");
       const searchInput = document.getElementById("searchInput");
       const sortSelect = document.getElementById("sortSelect");
 
@@ -960,21 +1733,40 @@
       const closeScreenBtn = document.getElementById("closeScreen");
       const fullscreenBtn = document.getElementById("fullscreenBtn");
       const variantBtn = document.getElementById("variantBtn");
+      const openSourceBtn = document.getElementById("openSourceBtn");
 
       const clearBtn = document.getElementById("clearBtn");
       const clearConfirm = document.getElementById("clearConfirm");
       const toastStack = document.getElementById("toastStack");
+      let modalReturnFocus = null;
+      let theaterReturnFocus = null;
+
+      addModal.inert = true;
+      addModal.setAttribute("aria-hidden", "true");
+      screenSection.inert = true;
+      libraryGrid.setAttribute("aria-busy", "false");
+      screenSection.setAttribute("aria-hidden", "true");
 
       // ---------- Modal Logic ----------
       function openModal() {
+        modalReturnFocus = document.activeElement;
+        addModal.inert = false;
+        addModal.setAttribute("aria-hidden", "false");
         addModal.classList.add("is-visible");
         embedInput.focus();
       }
       function closeModal() {
         addModal.classList.remove("is-visible");
+        addModal.inert = true;
+        addModal.setAttribute("aria-hidden", "true");
         addForm.reset();
         formError.hidden = true;
+        if (modalReturnFocus && modalReturnFocus.isConnected)
+          modalReturnFocus.focus();
       }
+      document
+        .getElementById("heroAddBtn")
+        .addEventListener("click", openModal);
       document
         .getElementById("openAddModalBtnHeader")
         .addEventListener("click", openModal);
@@ -1049,9 +1841,14 @@
 
       function renderLibrary() {
         libraryGrid.innerHTML = "";
-        libraryCount.textContent = library.length
-          ? "(" + library.length + ")"
-          : "";
+        libraryCount.textContent = String(library.length);
+        libraryCount.setAttribute(
+          "aria-label",
+          library.length === 1 ? "1 screening" : library.length + " screenings",
+        );
+        heroLibraryCount.textContent =
+          library.length +
+          (library.length === 1 ? " screening" : " screenings");
 
         let visible = library.slice();
         if (searchTerm) {
@@ -1071,17 +1868,27 @@
 
         if (library.length === 0) {
           emptyState.hidden = false;
+          emptyStateTitle.textContent = "Your watchlist is waiting";
           emptyStateText.textContent =
             "You haven't queued any screenings yet. Add an embed link or video URL to begin.";
           document.getElementById("openAddModalBtnEmpty").hidden = false;
         } else if (visible.length === 0) {
           emptyState.hidden = false;
+          emptyStateTitle.textContent = "No matches just yet";
           emptyStateText.textContent =
             "No titles match \u201c" + searchTerm + "\u201d.";
           document.getElementById("openAddModalBtnEmpty").hidden = true;
         } else {
           emptyState.hidden = true;
         }
+        librarySubtitle.textContent =
+          searchTerm && library.length
+            ? "Showing " +
+              visible.length +
+              " of " +
+              library.length +
+              " screenings."
+            : "Your hand-picked watchlist, all in one place.";
 
         visible.forEach((item) => {
           const li = document.createElement("li");
@@ -1090,6 +1897,7 @@
 
           const playBtn = document.createElement("button");
           playBtn.className = "ticket-play";
+          playBtn.setAttribute("aria-label", "Play " + item.title);
           playBtn.innerHTML = `
             <span class="play-icon"><svg width="14" height="14" viewBox="0 0 13 13" fill="none"><path d="M2 1.5L11 6.5L2 11.5V1.5Z" fill="currentColor"/></svg></span>
             <span class="ticket-info">
@@ -1103,6 +1911,9 @@
 
           const removeBtn = document.createElement("button");
           removeBtn.className = "ticket-icon-btn remove";
+          removeBtn.type = "button";
+          removeBtn.setAttribute("aria-label", "Remove " + item.title);
+          removeBtn.title = "Remove screening";
           removeBtn.innerHTML =
             '<svg width="12" height="12" viewBox="0 0 11 11" fill="none"><path d="M1 1L10 10M10 1L1 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
           removeBtn.addEventListener("click", (e) => {
@@ -1111,6 +1922,12 @@
           });
 
           actions.appendChild(removeBtn);
+          const stub = document.createElement("span");
+          stub.className = "ticket-stub";
+          stub.setAttribute("aria-hidden", "true");
+          stub.innerHTML =
+            '<span class="ticket-stub-label">Itacha One</span><span class="ticket-stub-barcode"></span>';
+          li.appendChild(stub);
           li.appendChild(playBtn);
           li.appendChild(actions);
           libraryGrid.appendChild(li);
@@ -1176,8 +1993,10 @@
       }
 
       function showItem(item) {
+        theaterReturnFocus = document.activeElement;
         nowShowingId = item.id;
         nowShowingTitle.textContent = item.title;
+        openSourceBtn.href = item.src;
         screenFrame.innerHTML = "";
         const loader = document.createElement("div");
         loader.className = "screen-loader";
@@ -1190,14 +2009,21 @@
         screenFrame.appendChild(iframe);
 
         screenSection.classList.add("is-visible");
+        screenSection.inert = false;
+        screenSection.setAttribute("aria-hidden", "false");
         document.body.style.overflow = "hidden"; // Prevent background scrolling
+        closeScreenBtn.focus();
       }
 
       function closeScreen() {
         nowShowingId = null;
         screenSection.classList.remove("is-visible");
+        screenSection.inert = true;
+        screenSection.setAttribute("aria-hidden", "true");
         setTimeout(() => (screenFrame.innerHTML = ""), 400);
         document.body.style.overflow = "";
+        if (theaterReturnFocus && theaterReturnFocus.isConnected)
+          theaterReturnFocus.focus();
       }
 
       addForm.addEventListener("submit", (e) => {
@@ -1255,6 +2081,28 @@
         });
 
       document.addEventListener("keydown", (e) => {
+        const activeDialog = addModal.classList.contains("is-visible")
+          ? addModal.querySelector('[role="dialog"]')
+          : screenSection.classList.contains("is-visible")
+            ? screenSection
+            : null;
+        if (e.key === "Tab" && activeDialog) {
+          const focusable = Array.from(
+            activeDialog.querySelectorAll(
+              'button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [href], iframe, [tabindex]:not([tabindex="-1"])',
+            ),
+          ).filter((element) => !element.hidden);
+          if (!focusable.length) return;
+          const first = focusable[0];
+          const last = focusable[focusable.length - 1];
+          if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
         if (
           e.key === "Escape" &&
           screenSection.classList.contains("is-visible")
