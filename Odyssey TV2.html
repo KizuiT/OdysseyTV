@@ -1,0 +1,1281 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Odyssey TV</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ---------- Design tokens ---------- */
+      :root {
+        --bg-deep: #0b0f1f;
+        --bg-panel: #151b33;
+        --bg-panel-2: #1b2240;
+        --gold: #e8b75d;
+        --gold-soft: #f2c572;
+        --periwinkle: #6e8fff;
+        --ink: #f3f0e8;
+        --ink-muted: #9aa1c2;
+        --danger: #e8735d;
+        --success: #7fd99a;
+        --serif: "Fraunces", serif;
+        --sans: "Manrope", sans-serif;
+        --radius: 12px;
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background: var(--bg-deep);
+        color: var(--ink);
+        font-family: var(--sans);
+        -webkit-font-smoothing: antialiased;
+      }
+      html {
+        scroll-padding-top: env(safe-area-inset-top, 0px);
+      }
+
+      body {
+        background:
+          radial-gradient(
+            ellipse 900px 500px at 15% -10%,
+            rgba(110, 143, 255, 0.16),
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse 700px 500px at 100% 0%,
+            rgba(232, 183, 93, 0.12),
+            transparent 55%
+          ),
+          linear-gradient(
+            180deg,
+            var(--bg-deep) 0%,
+            #0d1224 55%,
+            var(--bg-deep) 100%
+          );
+        min-height: 100vh;
+      }
+
+      .grain {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.05;
+        mix-blend-mode: overlay;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+        background-size: 180px 180px;
+      }
+
+      .glow {
+        position: fixed;
+        top: -20vh;
+        left: -10vw;
+        width: 70vw;
+        height: 70vh;
+        background: radial-gradient(
+          circle,
+          rgba(232, 183, 93, 0.1),
+          transparent 65%
+        );
+        filter: blur(10px);
+        pointer-events: none;
+        animation: drift 26s ease-in-out infinite alternate;
+      }
+
+      @keyframes drift {
+        from {
+          transform: translate(0, 0);
+        }
+        to {
+          transform: translate(6vw, 8vh);
+        }
+      }
+
+      .wrap {
+        position: relative;
+        z-index: 1;
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 48px 24px 96px;
+      }
+
+      /* ---------- Header ---------- */
+      .masthead {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        flex-wrap: wrap;
+        margin-bottom: 40px;
+      }
+
+      .header-text {
+        flex: 1;
+      }
+
+      .wordmark {
+        font-family: var(--serif);
+        font-style: italic;
+        font-weight: 500;
+        font-size: clamp(2.1rem, 5vw, 3rem);
+        margin: 0;
+        letter-spacing: -0.01em;
+        line-height: 1;
+      }
+
+      .tagline {
+        margin: 10px 0 0;
+        color: var(--ink-muted);
+        font-size: 0.95rem;
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .ghost-btn {
+        background: transparent;
+        border: 1px solid rgba(243, 240, 232, 0.18);
+        color: var(--ink-muted);
+        font-family: var(--sans);
+        font-size: 0.85rem;
+        font-weight: 600;
+        padding: 9px 16px;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .ghost-btn:hover {
+        border-color: rgba(243, 240, 232, 0.4);
+        color: var(--ink);
+        background: rgba(243, 240, 232, 0.05);
+      }
+      .ghost-btn.small {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+      }
+      .ghost-btn.danger {
+        border-color: rgba(232, 115, 93, 0.5);
+        color: var(--danger);
+      }
+      .ghost-btn.danger:hover {
+        border-color: var(--danger);
+        background: rgba(232, 115, 93, 0.1);
+      }
+
+      .ticket-btn {
+        background: linear-gradient(135deg, var(--gold-soft), var(--gold));
+        color: var(--bg-deep);
+        font-family: var(--sans);
+        font-weight: 700;
+        font-size: 0.95rem;
+        border: none;
+        border-radius: 999px;
+        padding: 13px 24px;
+        cursor: pointer;
+        box-shadow: 0 8px 24px rgba(232, 183, 93, 0.22);
+        transition:
+          transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+          box-shadow 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .ticket-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 28px rgba(232, 183, 93, 0.35);
+      }
+      .ticket-btn.small {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+
+      .clear-control {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .confirm-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .confirm-row span {
+        color: var(--ink-muted);
+        font-size: 0.85rem;
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--periwinkle);
+        outline-offset: 2px;
+      }
+
+      /* ---------- Modal (Add Form) ---------- */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(11, 15, 31, 0.85);
+        backdrop-filter: blur(8px);
+        z-index: 200;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+      .modal-overlay.is-visible {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .booth {
+        background: linear-gradient(160deg, var(--bg-panel), var(--bg-panel-2));
+        border: 1px solid rgba(243, 240, 232, 0.08);
+        border-radius: var(--radius);
+        padding: 32px;
+        width: 100%;
+        max-width: 500px;
+        box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
+        transform: translateY(20px) scale(0.95);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+      }
+      .modal-overlay.is-visible .booth {
+        transform: translateY(0) scale(1);
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        background: transparent;
+        border: none;
+        color: var(--ink-muted);
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 50%;
+        transition:
+          background 0.2s,
+          color 0.2s;
+        display: flex;
+      }
+      .modal-close:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--ink);
+      }
+
+      .booth h3 {
+        font-family: var(--serif);
+        font-style: italic;
+        font-weight: 500;
+        font-size: 1.5rem;
+        margin: 0 0 20px;
+      }
+
+      .field-label {
+        display: block;
+        font-size: 0.85rem;
+        color: var(--ink-muted);
+        margin-bottom: 8px;
+      }
+
+      textarea,
+      input[type="text"],
+      input[type="search"] {
+        width: 100%;
+        background: rgba(11, 15, 31, 0.55);
+        border: 1px solid rgba(243, 240, 232, 0.12);
+        border-radius: 8px;
+        color: var(--ink);
+        font-family: var(--sans);
+        font-size: 0.95rem;
+        padding: 12px 14px;
+        transition:
+          border-color 0.2s ease,
+          box-shadow 0.2s ease;
+        margin-bottom: 16px;
+      }
+      textarea:focus,
+      input:focus {
+        border-color: rgba(110, 143, 255, 0.6);
+        box-shadow: 0 0 0 3px rgba(110, 143, 255, 0.15);
+      }
+      textarea::placeholder,
+      input::placeholder {
+        color: rgba(154, 161, 194, 0.5);
+      }
+      textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+
+      .form-error {
+        color: var(--danger);
+        font-size: 0.85rem;
+        margin: -8px 0 16px;
+      }
+
+      /* ---------- Theater Mode Overlay ---------- */
+      .screen-section {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        background: rgba(8, 11, 22, 0.95);
+        backdrop-filter: blur(12px);
+        display: flex;
+        flex-direction: column;
+        padding: clamp(24px, 5vw, 48px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .screen-section.is-visible {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .screen-heading {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+        max-width: 1200px;
+        margin: 0 auto 24px;
+        width: 100%;
+      }
+
+      .now-showing-label {
+        color: var(--gold-soft);
+        font-size: 0.85rem;
+        margin: 0 0 4px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-weight: 600;
+      }
+      .now-showing-title {
+        font-family: var(--serif);
+        font-style: italic;
+        font-weight: 500;
+        font-size: 2rem;
+        margin: 0;
+        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+      }
+      .screen-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .screen-glass {
+        position: relative;
+        flex: 1;
+        max-width: 1200px;
+        width: 90%;
+        margin: 0 auto;
+        padding: 12px;
+        border-radius: 20px;
+        background: linear-gradient(
+          180deg,
+          rgba(243, 240, 232, 0.08),
+          rgba(243, 240, 232, 0.02)
+        );
+        border: 1px solid rgba(243, 240, 232, 0.1);
+        box-shadow:
+          0 40px 80px rgba(0, 0, 0, 0.6),
+          inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      }
+
+      .screen-frame {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      .screen-frame iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        display: block;
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+      }
+
+      .screen-loader {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        color: var(--ink-muted);
+        font-size: 0.85rem;
+        z-index: 0;
+      }
+      .spinner {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        border: 2px solid rgba(243, 240, 232, 0.2);
+        border-top-color: var(--gold-soft);
+        animation: spin 0.8s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* ---------- Library controls ---------- */
+      .library-section {
+        background: transparent;
+      }
+
+      .library-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 24px;
+      }
+      .library-heading h2 {
+        font-family: var(--serif);
+        font-style: italic;
+        font-weight: 500;
+        font-size: 1.5rem;
+        margin: 0;
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+      }
+      .library-count {
+        font-family: var(--sans);
+        font-style: normal;
+        font-size: 0.9rem;
+        color: var(--ink-muted);
+      }
+
+      .library-tools {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .search-field {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+      .search-field svg {
+        position: absolute;
+        left: 14px;
+        color: var(--ink-muted);
+        pointer-events: none;
+      }
+      .search-field input {
+        padding-left: 38px;
+        width: 240px;
+        font-size: 0.9rem;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin-bottom: 0;
+      }
+
+      .sort-select {
+        background: rgba(11, 15, 31, 0.55);
+        border: 1px solid rgba(243, 240, 232, 0.12);
+        color: var(--ink);
+        font-family: var(--sans);
+        font-size: 0.9rem;
+        padding: 10px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: border-color 0.2s;
+      }
+      .sort-select:focus,
+      .sort-select:hover {
+        border-color: rgba(110, 143, 255, 0.5);
+      }
+
+      .library-grid {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 24px;
+      }
+
+      .ticket {
+        position: relative;
+        background: linear-gradient(160deg, var(--bg-panel), var(--bg-panel-2));
+        border-radius: 12px;
+        padding: 18px 18px 18px 24px;
+        border: 1px solid rgba(243, 240, 232, 0.05);
+        transition:
+          transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+          box-shadow 0.3s ease,
+          border-color 0.3s ease;
+      }
+      .ticket:hover {
+        transform: translateY(-4px) scale(1.01);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+        border-color: rgba(243, 240, 232, 0.15);
+      }
+
+      .ticket::before,
+      .ticket::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 20px;
+        height: 20px;
+        background: var(--bg-deep);
+        border-radius: 50%;
+        transform: translateY(-50%);
+        box-shadow: inset 1px 0 0 rgba(243, 240, 232, 0.05);
+      }
+      .ticket::before {
+        left: -10px;
+      }
+      .ticket::after {
+        right: -10px;
+        box-shadow: inset -1px 0 0 rgba(243, 240, 232, 0.05);
+      }
+
+      .ticket-play {
+        width: 100%;
+        text-align: left;
+        background: none;
+        border: none;
+        color: var(--ink);
+        font-family: var(--sans);
+        cursor: pointer;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .ticket-play:hover .play-icon {
+        background: var(--gold);
+        color: var(--bg-deep);
+        border-color: var(--gold);
+        transform: scale(1.1);
+      }
+
+      .play-icon {
+        flex-shrink: 0;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: 1px solid rgba(243, 240, 232, 0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--ink-muted);
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .ticket-info {
+        min-width: 0;
+        flex: 1;
+      }
+      .ticket-title {
+        font-weight: 600;
+        font-size: 1rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-bottom: 2px;
+        display: block;
+      }
+
+      .ticket-source {
+        font-size: 0.78rem;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 2px 8px;
+        border-radius: 4px;
+        background: rgba(243, 240, 232, 0.05);
+        color: var(--ink-muted);
+      }
+      .platform-youtube {
+        color: #ff4e4e;
+        background: rgba(255, 78, 78, 0.1);
+      }
+      .platform-vimeo {
+        color: #5bc0de;
+        background: rgba(91, 192, 222, 0.1);
+      }
+      .platform-twitch {
+        color: #b9a3e3;
+        background: rgba(185, 163, 227, 0.1);
+      }
+
+      .ticket-actions {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        display: flex;
+        gap: 4px;
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+      .ticket:hover .ticket-actions,
+      .ticket:focus-within .ticket-actions {
+        opacity: 1;
+      }
+
+      .ticket-icon-btn {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(11, 15, 31, 0.6);
+        color: var(--ink-muted);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+      }
+      .ticket-icon-btn:hover {
+        color: var(--ink);
+        background: rgba(243, 240, 232, 0.15);
+      }
+      .ticket-icon-btn.remove:hover {
+        color: var(--danger);
+        background: rgba(232, 115, 93, 0.15);
+      }
+
+      .empty-state {
+        color: var(--ink-muted);
+        padding: 60px 24px;
+        text-align: center;
+        background: rgba(21, 27, 51, 0.3);
+        border: 1px dashed rgba(243, 240, 232, 0.15);
+        border-radius: 16px;
+        margin-top: 24px;
+      }
+      .empty-state svg {
+        display: block;
+        margin: 0 auto 16px;
+        opacity: 0.7;
+        color: var(--periwinkle);
+      }
+      .empty-state h3 {
+        font-family: var(--serif);
+        font-size: 1.3rem;
+        font-style: italic;
+        margin: 0 0 8px;
+        color: var(--ink);
+      }
+      .empty-state p {
+        margin: 0 0 24px;
+        font-size: 0.95rem;
+      }
+
+      /* ---------- Toasts ---------- */
+      .toast-stack {
+        position: fixed;
+        bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 300;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        pointer-events: none;
+      }
+      .toast {
+        background: var(--bg-panel-2);
+        border: 1px solid rgba(243, 240, 232, 0.14);
+        color: var(--ink);
+        font-size: 0.9rem;
+        padding: 12px 24px;
+        border-radius: 999px;
+        box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        transform: translateY(16px) scale(0.95);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+      .toast.is-visible {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      .toast.success {
+        border-left: 3px solid var(--success);
+      }
+      .toast.error {
+        border-left: 3px solid var(--danger);
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grain"></div>
+    <div class="glow"></div>
+
+    <div class="wrap">
+      <header class="masthead">
+        <div class="header-text">
+          <h1 class="wordmark">Odyssey TV</h1>
+          <p class="tagline">Your curated digital screening room.</p>
+        </div>
+        <div class="header-actions">
+          <div class="clear-control">
+            <button id="clearBtn" class="ghost-btn" type="button">
+              Clear library
+            </button>
+            <div id="clearConfirm" class="confirm-row" hidden>
+              <span>Wipe library?</span>
+              <button
+                id="confirmClearYes"
+                class="ghost-btn small danger"
+                type="button"
+              >
+                Yes
+              </button>
+              <button id="confirmClearNo" class="ghost-btn small" type="button">
+                Cancel
+              </button>
+            </div>
+          </div>
+          <button id="openAddModalBtnHeader" class="ticket-btn small">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path
+                d="M7 1V13M1 7H13"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+            Add Screening
+          </button>
+        </div>
+      </header>
+
+      <section class="library-section">
+        <div class="library-heading">
+          <h2>
+            Your Library <span id="libraryCount" class="library-count"></span>
+          </h2>
+          <div class="library-tools">
+            <label class="search-field">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <circle
+                  cx="7"
+                  cy="7"
+                  r="5"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                />
+                <path
+                  d="M11 11L15 15"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+              </svg>
+              <input
+                id="searchInput"
+                type="search"
+                placeholder="Search titles or sources... ( / )"
+                aria-label="Search library"
+              />
+            </label>
+            <select
+              id="sortSelect"
+              class="sort-select"
+              aria-label="Sort library"
+            >
+              <option value="newest">Newest first</option>
+              <option value="oldest">Oldest first</option>
+              <option value="az">Title A–Z</option>
+            </select>
+          </div>
+        </div>
+
+        <ul id="libraryGrid" class="library-grid" aria-busy="true"></ul>
+
+        <div id="emptyState" class="empty-state" hidden>
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <rect
+              x="6"
+              y="10"
+              width="36"
+              height="28"
+              rx="4"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linejoin="round"
+            />
+            <path d="M20 18L30 24L20 30V18Z" fill="currentColor" />
+          </svg>
+          <h3>The screen is blank</h3>
+          <p id="emptyStateText">
+            You haven't queued any screenings yet. Add an embed link or video
+            URL to begin.
+          </p>
+          <button id="openAddModalBtnEmpty" class="ticket-btn">
+            Add your first screening
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <!-- Add Screening Modal -->
+    <div id="addModal" class="modal-overlay">
+      <section class="booth" aria-label="Add a title to your library">
+        <button id="closeAddModal" class="modal-close" aria-label="Close modal">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path
+              d="M1 1L13 13M13 1L1 13"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
+        <h3>Add to Library</h3>
+        <form id="addForm">
+          <label class="field-label" for="embedInput"
+            >Embed code or media link</label
+          >
+          <textarea
+            id="embedInput"
+            placeholder="Paste an <iframe> embed or a video URL…"
+            required
+          ></textarea>
+
+          <label class="field-label" for="titleInput">Title (optional)</label>
+          <input
+            id="titleInput"
+            type="text"
+            placeholder="e.g. Friday night pick"
+            maxlength="60"
+          />
+
+          <p id="formError" class="form-error" role="alert" hidden></p>
+          <button
+            type="submit"
+            class="ticket-btn"
+            style="width: 100%; justify-content: center"
+          >
+            Save Screening
+          </button>
+        </form>
+      </section>
+    </div>
+
+    <!-- Theater Mode Overlay -->
+    <section id="screenSection" class="screen-section" aria-live="polite">
+      <div class="screen-heading">
+        <div>
+          <p class="now-showing-label">Now showing</p>
+          <h2 id="nowShowingTitle" class="now-showing-title"></h2>
+        </div>
+        <div class="screen-actions">
+          <button
+            id="variantBtn"
+            class="ghost-btn"
+            type="button"
+            title="Switch player if video won't load"
+          >
+            Alt Player
+          </button>
+          <button id="fullscreenBtn" class="ghost-btn" type="button">
+            Fullscreen
+          </button>
+          <button id="closeScreen" class="ghost-btn" type="button">
+            Close Theater (Esc)
+          </button>
+        </div>
+      </div>
+      <div class="screen-glass">
+        <div id="screenFrame" class="screen-frame"></div>
+      </div>
+    </section>
+
+    <div id="toastStack" class="toast-stack" aria-live="polite"></div>
+
+    <script>
+      // ---------- State ----------
+      let library = [];
+      let nowShowingId = null;
+      let sortMode = "newest";
+      let searchTerm = "";
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      const STORAGE_KEY = "odyssey-tv-library";
+
+      // ---------- Elements ----------
+      const addModal = document.getElementById("addModal");
+      const addForm = document.getElementById("addForm");
+      const embedInput = document.getElementById("embedInput");
+      const titleInput = document.getElementById("titleInput");
+      const formError = document.getElementById("formError");
+
+      const libraryGrid = document.getElementById("libraryGrid");
+      const emptyState = document.getElementById("emptyState");
+      const emptyStateText = document.getElementById("emptyStateText");
+      const libraryCount = document.getElementById("libraryCount");
+      const searchInput = document.getElementById("searchInput");
+      const sortSelect = document.getElementById("sortSelect");
+
+      const screenSection = document.getElementById("screenSection");
+      const screenFrame = document.getElementById("screenFrame");
+      const nowShowingTitle = document.getElementById("nowShowingTitle");
+      const closeScreenBtn = document.getElementById("closeScreen");
+      const fullscreenBtn = document.getElementById("fullscreenBtn");
+      const variantBtn = document.getElementById("variantBtn");
+
+      const clearBtn = document.getElementById("clearBtn");
+      const clearConfirm = document.getElementById("clearConfirm");
+      const toastStack = document.getElementById("toastStack");
+
+      // ---------- Modal Logic ----------
+      function openModal() {
+        addModal.classList.add("is-visible");
+        embedInput.focus();
+      }
+      function closeModal() {
+        addModal.classList.remove("is-visible");
+        addForm.reset();
+        formError.hidden = true;
+      }
+      document
+        .getElementById("openAddModalBtnHeader")
+        .addEventListener("click", openModal);
+      document
+        .getElementById("openAddModalBtnEmpty")
+        .addEventListener("click", openModal);
+      document
+        .getElementById("closeAddModal")
+        .addEventListener("click", closeModal);
+      addModal.addEventListener("click", (e) => {
+        if (e.target === addModal) closeModal();
+      });
+
+      // ---------- Persistence ----------
+      function loadLibrary() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          library = raw ? JSON.parse(raw) : [];
+        } catch (err) {
+          library = [];
+        }
+        renderLibrary();
+      }
+      function saveLibrary() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(library));
+        } catch (err) {
+          showToast("Couldn't save — storage full.", "error");
+        }
+      }
+
+      function showToast(message, kind) {
+        const el = document.createElement("div");
+        el.className = "toast" + (kind ? " " + kind : "");
+        el.textContent = message;
+        toastStack.appendChild(el);
+        requestAnimationFrame(() => el.classList.add("is-visible"));
+        setTimeout(() => {
+          el.classList.remove("is-visible");
+          setTimeout(() => el.remove(), 400);
+        }, 3000);
+      }
+
+      function parseEmbed(raw) {
+        const trimmed = raw.trim();
+        if (!trimmed) return null;
+        const iframeMatch = trimmed.match(
+          /<iframe[^>]*\ssrc=["']([^"']+)["']/i,
+        );
+        const candidate = iframeMatch ? iframeMatch[1] : trimmed;
+        try {
+          const url = new URL(candidate);
+          if (url.protocol === "http:" || url.protocol === "https:")
+            return url.href;
+        } catch (err) {}
+        return null;
+      }
+
+      function getSourceData(src) {
+        try {
+          const host = new URL(src).hostname.replace(/^www\./, "");
+          let platformClass = "";
+          if (host.includes("youtube") || host.includes("youtu.be"))
+            platformClass = "platform-youtube";
+          if (host.includes("vimeo")) platformClass = "platform-vimeo";
+          if (host.includes("twitch")) platformClass = "platform-twitch";
+          return { name: host, cssClass: platformClass };
+        } catch (err) {
+          return { name: "custom source", cssClass: "" };
+        }
+      }
+
+      function renderLibrary() {
+        libraryGrid.innerHTML = "";
+        libraryCount.textContent = library.length
+          ? "(" + library.length + ")"
+          : "";
+
+        let visible = library.slice();
+        if (searchTerm) {
+          const q = searchTerm.toLowerCase();
+          visible = visible.filter(
+            (i) =>
+              i.title.toLowerCase().includes(q) ||
+              getSourceData(i.src).name.toLowerCase().includes(q),
+          );
+        }
+
+        if (sortMode === "oldest")
+          visible.sort((a, b) => a.addedAt - b.addedAt);
+        else if (sortMode === "az")
+          visible.sort((a, b) => a.title.localeCompare(b.title));
+        else visible.sort((a, b) => b.addedAt - a.addedAt);
+
+        if (library.length === 0) {
+          emptyState.hidden = false;
+          emptyStateText.textContent =
+            "You haven't queued any screenings yet. Add an embed link or video URL to begin.";
+          document.getElementById("openAddModalBtnEmpty").hidden = false;
+        } else if (visible.length === 0) {
+          emptyState.hidden = false;
+          emptyStateText.textContent =
+            "No titles match \u201c" + searchTerm + "\u201d.";
+          document.getElementById("openAddModalBtnEmpty").hidden = true;
+        } else {
+          emptyState.hidden = true;
+        }
+
+        visible.forEach((item) => {
+          const li = document.createElement("li");
+          li.className = "ticket";
+          const sourceData = getSourceData(item.src);
+
+          const playBtn = document.createElement("button");
+          playBtn.className = "ticket-play";
+          playBtn.innerHTML = `
+            <span class="play-icon"><svg width="14" height="14" viewBox="0 0 13 13" fill="none"><path d="M2 1.5L11 6.5L2 11.5V1.5Z" fill="currentColor"/></svg></span>
+            <span class="ticket-info">
+              <span class="ticket-title">${escapeHtml(item.title)}</span>
+              <span class="ticket-source ${sourceData.cssClass}">${escapeHtml(sourceData.name)}</span>
+            </span>`;
+          playBtn.addEventListener("click", () => showItem(item));
+
+          const actions = document.createElement("div");
+          actions.className = "ticket-actions";
+
+          const removeBtn = document.createElement("button");
+          removeBtn.className = "ticket-icon-btn remove";
+          removeBtn.innerHTML =
+            '<svg width="12" height="12" viewBox="0 0 11 11" fill="none"><path d="M1 1L10 10M10 1L1 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
+          removeBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            removeItem(item.id);
+          });
+
+          actions.appendChild(removeBtn);
+          li.appendChild(playBtn);
+          li.appendChild(actions);
+          libraryGrid.appendChild(li);
+        });
+      }
+
+      function escapeHtml(str) {
+        const div = document.createElement("div");
+        div.textContent = str;
+        return div.innerHTML;
+      }
+
+      function addItem(src, title) {
+        if (library.find((i) => i.src === src)) {
+          showToast("Already in your library.", "error");
+          return;
+        }
+        const item = {
+          id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
+          src,
+          title: title || getSourceData(src).name || "Untitled",
+          addedAt: Date.now(),
+        };
+        library.unshift(item);
+        saveLibrary();
+        renderLibrary();
+        closeModal();
+        showToast("Added \u201c" + item.title + "\u201d", "success");
+      }
+
+      function removeItem(id) {
+        library = library.filter((i) => i.id !== id);
+        saveLibrary();
+        renderLibrary();
+        if (nowShowingId === id) closeScreen();
+      }
+
+      function clearLibrary() {
+        library = [];
+        saveLibrary();
+        renderLibrary();
+        closeScreen();
+        showToast("Library cleared", "");
+      }
+
+      let screenVariant = "standard";
+      function buildIframe(item) {
+        const iframe = document.createElement("iframe");
+        iframe.src = item.src;
+        iframe.setAttribute("width", "100%");
+        iframe.setAttribute("height", "100%");
+        iframe.setAttribute("frameborder", "0");
+        if (screenVariant === "alt") {
+          iframe.setAttribute("allowfullscreen", "yes");
+        } else {
+          iframe.setAttribute(
+            "allow",
+            "autoplay; encrypted-media; picture-in-picture; fullscreen",
+          );
+          iframe.setAttribute("allowfullscreen", "");
+        }
+        return iframe;
+      }
+
+      function showItem(item) {
+        nowShowingId = item.id;
+        nowShowingTitle.textContent = item.title;
+        screenFrame.innerHTML = "";
+        const loader = document.createElement("div");
+        loader.className = "screen-loader";
+        loader.innerHTML =
+          '<span class="spinner"></span><span>Loading\u2026</span>';
+        screenFrame.appendChild(loader);
+
+        const iframe = buildIframe(item);
+        iframe.addEventListener("load", () => loader.remove());
+        screenFrame.appendChild(iframe);
+
+        screenSection.classList.add("is-visible");
+        document.body.style.overflow = "hidden"; // Prevent background scrolling
+      }
+
+      function closeScreen() {
+        nowShowingId = null;
+        screenSection.classList.remove("is-visible");
+        setTimeout(() => (screenFrame.innerHTML = ""), 400);
+        document.body.style.overflow = "";
+      }
+
+      addForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const src = parseEmbed(embedInput.value);
+        if (!src) {
+          formError.textContent = "Invalid link or embed code.";
+          formError.hidden = false;
+          return;
+        }
+        addItem(src, titleInput.value.trim());
+      });
+
+      closeScreenBtn.addEventListener("click", closeScreen);
+      fullscreenBtn.addEventListener("click", () => {
+        const iframe = screenFrame.querySelector("iframe");
+        if (iframe && iframe.requestFullscreen)
+          iframe.requestFullscreen().catch(() => {});
+      });
+
+      variantBtn.addEventListener("click", () => {
+        const current = library.find((i) => i.id === nowShowingId);
+        if (!current) return;
+        screenVariant = screenVariant === "standard" ? "alt" : "standard";
+        variantBtn.textContent =
+          screenVariant === "alt" ? "Standard Player" : "Alt Player";
+        showItem(current);
+      });
+
+      searchInput.addEventListener("input", (e) => {
+        searchTerm = e.target.value.trim();
+        renderLibrary();
+      });
+      sortSelect.addEventListener("change", (e) => {
+        sortMode = e.target.value;
+        renderLibrary();
+      });
+
+      document.getElementById("clearBtn").addEventListener("click", () => {
+        document.getElementById("clearBtn").hidden = true;
+        clearConfirm.hidden = false;
+      });
+      document
+        .getElementById("confirmClearNo")
+        .addEventListener("click", () => {
+          clearConfirm.hidden = true;
+          document.getElementById("clearBtn").hidden = false;
+        });
+      document
+        .getElementById("confirmClearYes")
+        .addEventListener("click", () => {
+          clearLibrary();
+          clearConfirm.hidden = true;
+          document.getElementById("clearBtn").hidden = false;
+        });
+
+      document.addEventListener("keydown", (e) => {
+        if (
+          e.key === "Escape" &&
+          screenSection.classList.contains("is-visible")
+        )
+          closeScreen();
+        else if (
+          e.key === "Escape" &&
+          addModal.classList.contains("is-visible")
+        )
+          closeModal();
+        if (
+          e.key === "/" &&
+          document.activeElement.tagName !== "INPUT" &&
+          document.activeElement.tagName !== "TEXTAREA"
+        ) {
+          e.preventDefault();
+          searchInput.focus();
+        }
+      });
+
+      loadLibrary();
+    </script>
+  </body>
+</html>
